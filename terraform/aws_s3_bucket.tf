@@ -2,6 +2,7 @@ resource "aws_s3_bucket" "storage" {
   bucket = "${var.application}-private-${random_string.postfix.result}"
   acl    = "private"
   region = var.aws_region
+  force_destroy = true
 
   server_side_encryption_configuration {
     rule {
@@ -12,7 +13,5 @@ resource "aws_s3_bucket" "storage" {
     }
   }
 
-  tags = map(
-    "kubernetes.io/cluster/${var.application}", "owned",
-  )
+  tags = var.tags
 }

@@ -55,9 +55,18 @@ func TestTerraformS3PrivateBucket(t *testing.T) {
 	fmt.Println(terraform.OutputAll(t, terraformOptions))
 
 	assert.NotEmpty(t, terraform.Output(t, terraformOptions, "bucket_arn"))
-	assert.NotEmpty(t, terraform.Output(t, terraformOptions, "bucket_id"))
-	assert.NotEmpty(t, terraform.Output(t, terraformOptions, "bucket_region"))
 
-	assert.NotEmpty(t, terraform.Output(t, terraformOptions, "access_key"))
-	assert.NotEmpty(t, terraform.Output(t, terraformOptions, "secret_key"))
+	bucketID := terraform.Output(t, terraformOptions, "bucket_id")
+	bucketRegion := terraform.Output(t, terraformOptions, "bucket_region")
+	assert.NotEmpty(t, bucketID)
+	assert.NotEmpty(t, bucketRegion)
+
+	accessKey := terraform.Output(t, terraformOptions, "access_key")
+	secretKey := terraform.Output(t, terraformOptions, "secret_key")
+	assert.NotEmpty(t, accessKey)
+	assert.NotEmpty(t, secretKey)
+
+	// time.Sleep(time.Second * 20)
+	// Do test upload to the bucket - with new credentials
+	// uploadToS3(t, bucketID, bucketRegion, accessKey, secretKey)
 }

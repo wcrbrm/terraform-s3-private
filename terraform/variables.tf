@@ -14,4 +14,9 @@ variable "tags" {
   description = "Additional tags (e.g. `map('BusinessUnit','XYZ')`"
 }
 
+variable "force_destroy" {
+  type = bool
+  default = true
 
+  description = "Whether it is safe to destroy bucket contents"
+}

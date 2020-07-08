@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 
@@ -66,7 +67,8 @@ func TestTerraformS3PrivateBucket(t *testing.T) {
 	assert.NotEmpty(t, accessKey)
 	assert.NotEmpty(t, secretKey)
 
-	// time.Sleep(time.Second * 20)
+	// waiting
+	time.Sleep(time.Second * 10)
 	// Do test upload to the bucket - with new credentials
-	// uploadToS3(t, bucketID, bucketRegion, accessKey, secretKey)
+	uploadToS3(t, bucketID, bucketRegion, accessKey, secretKey)
 }
